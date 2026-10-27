@@ -1,0 +1,151 @@
+==========================================================================
+SCHEDULABILITY REPORT  [constrained]
+==========================================================================
+Task        C     T     D      u_i
+t1          1     4     4   0.2500
+t2          2     6     6   0.3333
+t3          2    12     3   0.1667
+--------------------------------------------------------------------------
+n = 3   U = 0.7500   hyperperiod = 12   (constrained deadlines -> Deadline Monotonic)
+density sum(C/D) = 1.2500
+Liu & Layland bound n(2^(1/n)-1) = 0.7798   density <= bound ? FAIL
+Response Time Analysis (DM priority order):
+   Task     prio   R_i   D_i  iter  verdict
+   t3          1     2     3     1  OK
+   t1          2     3     4     2  OK
+   t2          3     6     6     3  OK
+DM verdict : SCHEDULABLE (exact RTA)
+EDF verdict: SCHEDULABLE   [U <= 1: yes; exact processor-demand test used]
+Simulation over 12 units: DM misses = 0, EDF misses = 0; ctx switches DM = 6, EDF = 5
+chart -> figures/mp22_constrained.png
+
+==========================================================================
+SCHEDULABILITY REPORT  [eight_tasks]
+==========================================================================
+Task        C     T     D      u_i
+t1          1    10    10   0.1000
+t2          1    12    12   0.0833
+t3          2    15    15   0.1333
+t4          2    20    20   0.1000
+t5          3    24    24   0.1250
+t6          3    30    30   0.1000
+t7          4    40    40   0.1000
+t8          6    60    60   0.1000
+--------------------------------------------------------------------------
+n = 8   U = 0.8417   hyperperiod = 120
+Liu & Layland bound n(2^(1/n)-1) = 0.7241   U <= bound ? FAIL
+Response Time Analysis (RM priority order):
+   Task     prio   R_i   D_i  iter  verdict
+   t1          1     1    10     1  OK
+   t2          2     2    12     2  OK
+   t3          3     4    15     2  OK
+   t4          4     6    20     2  OK
+   t5          5     9    24     2  OK
+   t6          6    14    30     4  OK
+   t7          7    20    40     3  OK
+   t8          8    40    60     6  OK
+RM verdict : SCHEDULABLE (exact RTA)
+EDF verdict: SCHEDULABLE (U <= 1)
+Simulation over 120 units: RM misses = 0, EDF misses = 0; ctx switches RM = 58, EDF = 58
+chart -> figures/mp22_eight_tasks.png
+
+==========================================================================
+SCHEDULABILITY REPORT  [ex_2_2_2]
+==========================================================================
+Task        C     T     D      u_i
+t1          1     4     4   0.2500
+t2          2     6     6   0.3333
+t3          2    12    12   0.1667
+--------------------------------------------------------------------------
+n = 3   U = 0.7500   hyperperiod = 12
+Liu & Layland bound n(2^(1/n)-1) = 0.7798   U <= bound ? PASS
+RM verdict : SCHEDULABLE (utilization bound)
+EDF verdict: SCHEDULABLE (U <= 1)
+Simulation over 12 units: RM misses = 0, EDF misses = 0; ctx switches RM = 6, EDF = 6
+chart -> figures/mp22_ex_2_2_2.png
+
+==========================================================================
+SCHEDULABILITY REPORT  [ex_2_3_2]
+==========================================================================
+Task        C     T     D      u_i
+t1          1     4     4   0.2500
+t2          2     6     6   0.3333
+t3          2    12    12   0.1667
+t4          1     8     8   0.1250
+--------------------------------------------------------------------------
+n = 4   U = 0.8750   hyperperiod = 24
+Liu & Layland bound n(2^(1/n)-1) = 0.7568   U <= bound ? FAIL
+Response Time Analysis (RM priority order):
+   Task     prio   R_i   D_i  iter  verdict
+   t1          1     1     4     1  OK
+   t2          2     3     6     2  OK
+   t4          3     4     8     2  OK
+   t3          4    11    12     5  OK
+RM verdict : SCHEDULABLE (exact RTA)
+EDF verdict: SCHEDULABLE (U <= 1)
+Simulation over 24 units: RM misses = 0, EDF misses = 0; ctx switches RM = 15, EDF = 15
+chart -> figures/mp22_ex_2_3_2.png
+
+==========================================================================
+SCHEDULABILITY REPORT  [harmonic_full]
+==========================================================================
+Task        C     T     D      u_i
+t1          1     4     4   0.2500
+t2          2     8     8   0.2500
+t3          4    16    16   0.2500
+t4          4    16    16   0.2500
+--------------------------------------------------------------------------
+n = 4   U = 1.0000   hyperperiod = 16
+Liu & Layland bound n(2^(1/n)-1) = 0.7568   U <= bound ? FAIL
+Response Time Analysis (RM priority order):
+   Task     prio   R_i   D_i  iter  verdict
+   t1          1     1     4     1  OK
+   t2          2     3     8     2  OK
+   t3          3     8    16     3  OK
+   t4          4    16    16     4  OK
+RM verdict : SCHEDULABLE (exact RTA)
+EDF verdict: SCHEDULABLE (U <= 1)
+Simulation over 16 units: RM misses = 0, EDF misses = 0; ctx switches RM = 9, EDF = 9
+chart -> figures/mp22_harmonic_full.png
+
+==========================================================================
+SCHEDULABILITY REPORT  [overload]
+==========================================================================
+Task        C     T     D      u_i
+t1          2     4     4   0.5000
+t2          3     6     6   0.5000
+t3          2     8     8   0.2500
+--------------------------------------------------------------------------
+n = 3   U = 1.2500   hyperperiod = 24
+Liu & Layland bound n(2^(1/n)-1) = 0.7798   U <= bound ? FAIL
+Response Time Analysis (RM priority order):
+   Task     prio   R_i   D_i  iter  verdict
+   t1          1     2     4     1  OK
+   t2          2    >6     6     2  MISS
+   t3          3    >8     8     2  MISS
+RM verdict : NOT SCHEDULABLE (RTA: deadline miss)
+EDF verdict: INFEASIBLE (U > 1)
+!! U > 1: the task set is infeasible on one processor under ANY algorithm.
+Simulation over 24 units: RM misses = 5, EDF misses = 5; ctx switches RM = 13, EDF = 10
+chart -> figures/mp22_overload.png
+
+==========================================================================
+SCHEDULABILITY REPORT  [rm_fails_edf_ok]
+==========================================================================
+Task        C     T     D      u_i
+a           4    10    10   0.4000
+b           5    12    12   0.4167
+c           2    15    15   0.1333
+--------------------------------------------------------------------------
+n = 3   U = 0.9500   hyperperiod = 60
+Liu & Layland bound n(2^(1/n)-1) = 0.7798   U <= bound ? FAIL
+Response Time Analysis (RM priority order):
+   Task     prio   R_i   D_i  iter  verdict
+   a           1     4    10     1  OK
+   b           2     9    12     2  OK
+   c           3   >15    15     3  MISS
+RM verdict : NOT SCHEDULABLE (RTA: deadline miss)
+EDF verdict: SCHEDULABLE (U <= 1)
+Simulation over 60 units: RM misses = 3, EDF misses = 0; ctx switches RM = 19, EDF = 15
+chart -> figures/mp22_rm_fails_edf_ok.png
+

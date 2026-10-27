@@ -1,0 +1,100 @@
+========================================================================
+Step 2 - Section 2.2.2 three-task example
+========================================================================
+Task     C    T    D      u_i
+t1       1    4    4   0.2500
+t2       2    6    6   0.3333
+t3       2   12   12   0.1667
+Total U = 0.7500   rm_bound(3) = 0.7798
+RM sufficient test (U <= bound): PASS - guaranteed
+EDF exact test (U <= 1):        PASS - schedulable
+========================================================================
+Step 3 - Section 2.3.2 four-task example (adds t4: C=1, T=8)
+========================================================================
+Task     C    T    D      u_i
+t1       1    4    4   0.2500
+t2       2    6    6   0.3333
+t3       2   12   12   0.1667
+t4       1    8    8   0.1250
+Total U = 0.8750   rm_bound(4) = 0.7568
+RM sufficient test (U <= bound): FAIL - inconclusive
+EDF exact test (U <= 1):        PASS - schedulable
+========================================================================
+Steps 4-6 - RM and EDF simulation of the four-task set, hyperperiod = 24
+========================================================================
+RM   12241322143.1223142213..   misses=0 ctx-switches=15 preemptions=2
+     worst response times: {'t1': 1, 't2': 3, 't3': 11, 't4': 4}
+EDF  12241322134.1223132214..   misses=0 ctx-switches=15 preemptions=2
+     worst response times: {'t1': 1, 't2': 3, 't3': 10, 't4': 6}
+Ticks where RM and EDF differ: [9, 10, 17, 21]
+t1 identical in both schedules: True
+========================================================================
+Step 7 - Response Time Analysis, RM priorities (Section 2.5.2)
+========================================================================
+RM priority order: t1 > t2 > t4 > t3
+  t4: higher-priority = ['t1', 't2']  iterations R: 1 -> 4 -> 4   R = 4 <= D = 8: True
+  t3: higher-priority = ['t1', 't2', 't4']  iterations R: 2 -> 6 -> 7 -> 9 -> 11 -> 11   R = 11 <= D = 12: True
+Task  Prio   C   T   D    R  iter  verdict
+t1       1   1   4   4    1     1  OK
+t2       2   2   6   6    3     2  OK
+t4       3   1   8   8    4     2  OK
+t3       4   2  12  12   11     5  OK
+Conclusion: every R_i <= D_i, so the set IS RM-schedulable even though U = 0.875 > 0.757.
+========================================================================
+Steps 8-9 - priority inversion scenario (base)
+========================================================================
+NONE  L  L  M  M  M  M  L  L  L  L  H  H  .  .  .  .
+      finish times: {'M': 6, 'L': 10, 'H': 12}
+PIP   L  L  L  L  L  L  H  H  M  M  M  M  .  .  .  .
+      finish times: {'L': 6, 'H': 8, 'M': 12}
+========================================================================
+Steps 8-9 - priority inversion scenario (with second medium task M2)
+========================================================================
+NONE  L  L  M  M  M  M M2 M2 M2  L  L  L  L  H  H  .  .  .  .  .
+      finish times: {'M': 6, 'M2': 9, 'L': 13, 'H': 15}
+PIP   L  L  L  L  L  L  H  H  M  M  M  M M2 M2 M2  .  .  .  .  .
+      finish times: {'L': 6, 'H': 8, 'M': 12, 'M2': 15}
+========================================================================
+Step 10 - blocking time of H (arrival t=1, C_H=2)
+========================================================================
+Scenario  Protocol    H done   R_H  blocked  mutex-wait  bound(PIP)
+1 medium  NONE            12    11        9           9  <= 6 (one CS of L)
+1 medium  PIP              8     7        5           5  <= 6 (one CS of L)
+2 medium  NONE            15    14       12          12  <= 6 (one CS of L)
+2 medium  PIP              8     7        5           5  <= 6 (one CS of L)
+PIP bound (Section 2.7.1): one critical section per lower-priority task sharing S = |CS_L| = 6.
+========================================================================
+Lab task 1 - Deadline Monotonic versus RM
+========================================================================
+Implicit deadlines (four-task set): DM schedule identical to RM? True
+Constrained set: t1(C=1,T=4,D=4) t2(C=2,T=6,D=6) t3(C=2,T=12,D=3)
+  RM order: t1 > t2 > t3   DM order: t3 > t1 > t2
+  RM: 122313221...  misses=[('t3', 1, 3)]
+  DM: 331212221...  misses=[]
+  RTA under RM: t1: R=1 (D=4) OK, t2: R=3 (D=6) OK, t3: R=5 (D=3) MISS
+  RTA under DM: t3: R=2 (D=3) OK, t1: R=3 (D=4) OK, t2: R=6 (D=6) OK
+========================================================================
+Lab task 2 - rm_bound(n) sweep, n = 1..10
+========================================================================
+  n=1   bound=1.0000
+  n=2   bound=0.8284
+  n=3   bound=0.7798
+  n=4   bound=0.7568
+  n=5   bound=0.7435
+  n=6   bound=0.7348
+  n=7   bound=0.7286
+  n=8   bound=0.7241
+  n=9   bound=0.7205
+  n=10  bound=0.7177
+  ln 2 = 0.6931
+========================================================================
+Lab task 3 - Least Laxity First and context switches over one hyperperiod
+========================================================================
+ Four-task set (U = 0.875), H = 24
+  RM   switches= 15 preemptions=  2 misses=0  12241322143.1223142213..
+  EDF  switches= 15 preemptions=  2 misses=0  12241322134.1223132214..
+  LLF  switches= 15 preemptions=  2 misses=0  12241322134.1223132214..
+ Heavier set a(4,10) b(5,12) c(2,15), U = 0.95, H = 60
+  RM   switches= 19 preemptions=  5 misses=3  aaaabbbbbcaaaabbbbbcaaaabbbbbcaaaaccbbbbaaaabcccbbaaaabbb...
+  EDF  switches= 15 preemptions=  1 misses=0  aaaabbbbbccaaaabbbbbaaaaccbbbbbaaaaccbbbbbaaaaccbbaaaabbb...
+  LLF  switches= 31 preemptions= 17 misses=0  aabababbbccaaaabbbbbaaacacbbbbbaaaacbbcbababaaccbbaababab...

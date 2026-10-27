@@ -1,0 +1,150 @@
+==============================================================================
+Test set A_balanced: n=14, U=2.425 (60.6% of m=4), max u=0.200
+  tasks: a1(3/20=0.150), a2(4/20=0.200), a3(6/40=0.150), a4(2/10=0.200), a5(7/40=0.175), a6(3/20=0.150), a7(6/40=0.150), a8(2/10=0.200), a9(4/20=0.200), a10(7/40=0.175), a11(3/20=0.150), a12(6/40=0.150), a13(2/10=0.200), a14(7/40=0.175)
+==============================================================================
+  FF   OK   cores used=4/4  per-core U=[0.700, 0.675, 0.675, 0.375]  placed U=2.425 (60.6% of m)  | cores needed (unlimited)=4, lower bound ceil(U)=3
+        core 0: ['a1', 'a2', 'a3', 'a4']  n=4  U=0.700  bound=0.757
+        core 1: ['a5', 'a6', 'a7', 'a8']  n=4  U=0.675  bound=0.757
+        core 2: ['a9', 'a10', 'a11', 'a12']  n=4  U=0.675  bound=0.757
+        core 3: ['a13', 'a14']  n=2  U=0.375  bound=0.828
+  FFD  OK   cores used=4/4  per-core U=[0.750, 0.750, 0.625, 0.300]  placed U=2.425 (60.6% of m)  | cores needed (unlimited)=4, lower bound ceil(U)=3
+        core 0: ['a2', 'a4', 'a8', 'a1']  n=4  U=0.750  bound=0.757
+        core 1: ['a9', 'a13', 'a5', 'a10']  n=4  U=0.750  bound=0.757
+        core 2: ['a14', 'a3', 'a6', 'a7']  n=4  U=0.625  bound=0.757
+        core 3: ['a11', 'a12']  n=2  U=0.300  bound=0.828
+  BFD  OK   cores used=4/4  per-core U=[0.750, 0.750, 0.625, 0.300]  placed U=2.425 (60.6% of m)  | cores needed (unlimited)=4, lower bound ceil(U)=3
+        core 0: ['a2', 'a4', 'a8', 'a1']  n=4  U=0.750  bound=0.757
+        core 1: ['a9', 'a13', 'a5', 'a10']  n=4  U=0.750  bound=0.757
+        core 2: ['a14', 'a3', 'a6', 'a7']  n=4  U=0.625  bound=0.757
+        core 3: ['a11', 'a12']  n=2  U=0.300  bound=0.828
+  WF   OK   cores used=4/4  per-core U=[0.700, 0.675, 0.500, 0.550]  placed U=2.425 (60.6% of m)  | cores needed (unlimited)=14, lower bound ceil(U)=3
+        core 0: ['a1', 'a5', 'a10', 'a13']  n=4  U=0.700  bound=0.757
+        core 1: ['a2', 'a7', 'a11', 'a14']  n=4  U=0.675  bound=0.757
+        core 2: ['a3', 'a6', 'a9']  n=3  U=0.500  bound=0.780
+        core 3: ['a4', 'a8', 'a12']  n=3  U=0.550  bound=0.780
+==============================================================================
+Test set B_skewed: n=12, U=2.650 (66.2% of m=4), max u=0.650
+  tasks: b1(1/10=0.100), b2(2/20=0.100), b3(11/20=0.550), b4(3/40=0.075), b5(6/10=0.600), b6(1/10=0.100), b7(2/20=0.100), b8(26/40=0.650), b9(3/40=0.075), b10(1/10=0.100), b11(2/20=0.100), b12(4/40=0.100)
+==============================================================================
+  FF   OK   cores used=4/4  per-core U=[0.750, 0.775, 0.750, 0.375]  placed U=2.650 (66.2% of m)  | cores needed (unlimited)=4, lower bound ceil(U)=3
+        core 0: ['b1', 'b2', 'b3']  n=3  U=0.750  bound=0.780
+        core 1: ['b4', 'b5', 'b6']  n=3  U=0.775  bound=0.780
+        core 2: ['b7', 'b8']  n=2  U=0.750  bound=0.828
+        core 3: ['b9', 'b10', 'b11', 'b12']  n=4  U=0.375  bound=0.757
+  FFD  OK   cores used=4/4  per-core U=[0.750, 0.775, 0.750, 0.375]  placed U=2.650 (66.2% of m)  | cores needed (unlimited)=4, lower bound ceil(U)=3
+        core 0: ['b8', 'b1']  n=2  U=0.750  bound=0.828
+        core 1: ['b5', 'b2', 'b4']  n=3  U=0.775  bound=0.780
+        core 2: ['b3', 'b6', 'b7']  n=3  U=0.750  bound=0.780
+        core 3: ['b10', 'b11', 'b12', 'b9']  n=4  U=0.375  bound=0.757
+  BFD  OK   cores used=4/4  per-core U=[0.750, 0.775, 0.750, 0.375]  placed U=2.650 (66.2% of m)  | cores needed (unlimited)=4, lower bound ceil(U)=3
+        core 0: ['b8', 'b1']  n=2  U=0.750  bound=0.828
+        core 1: ['b5', 'b2', 'b4']  n=3  U=0.775  bound=0.780
+        core 2: ['b3', 'b6', 'b7']  n=3  U=0.750  bound=0.780
+        core 3: ['b10', 'b11', 'b12', 'b9']  n=4  U=0.375  bound=0.757
+  WF   FAIL cores used=4/4  per-core U=[0.375, 0.400, 0.550, 0.675]  placed U=2.000 (50.0% of m)  unplaced=['b8']  | cores needed (unlimited)=12, lower bound ceil(U)=3
+        core 0: ['b1', 'b6', 'b9', 'b11']  n=4  U=0.375  bound=0.757
+        core 1: ['b2', 'b7', 'b10', 'b12']  n=4  U=0.400  bound=0.757
+        core 2: ['b3']  n=1  U=0.550  bound=1.000
+        core 3: ['b4', 'b5']  n=2  U=0.675  bound=0.828
+==============================================================================
+Test set C_tight: n=10, U=3.750 (93.8% of m=4), max u=0.375
+  tasks: c1(15/40=0.375), c2(15/40=0.375), c3(15/40=0.375), c4(15/40=0.375), c5(15/40=0.375), c6(15/40=0.375), c7(15/40=0.375), c8(15/40=0.375), c9(15/40=0.375), c10(15/40=0.375)
+==============================================================================
+  FF   FAIL cores used=4/4  per-core U=[0.750, 0.750, 0.750, 0.750]  placed U=3.000 (75.0% of m)  unplaced=['c9', 'c10']  | cores needed (unlimited)=5, lower bound ceil(U)=4
+        core 0: ['c1', 'c2']  n=2  U=0.750  bound=0.828
+        core 1: ['c3', 'c4']  n=2  U=0.750  bound=0.828
+        core 2: ['c5', 'c6']  n=2  U=0.750  bound=0.828
+        core 3: ['c7', 'c8']  n=2  U=0.750  bound=0.828
+  FFD  FAIL cores used=4/4  per-core U=[0.750, 0.750, 0.750, 0.750]  placed U=3.000 (75.0% of m)  unplaced=['c9', 'c10']  | cores needed (unlimited)=5, lower bound ceil(U)=4
+        core 0: ['c1', 'c2']  n=2  U=0.750  bound=0.828
+        core 1: ['c3', 'c4']  n=2  U=0.750  bound=0.828
+        core 2: ['c5', 'c6']  n=2  U=0.750  bound=0.828
+        core 3: ['c7', 'c8']  n=2  U=0.750  bound=0.828
+  BFD  FAIL cores used=4/4  per-core U=[0.750, 0.750, 0.750, 0.750]  placed U=3.000 (75.0% of m)  unplaced=['c9', 'c10']  | cores needed (unlimited)=5, lower bound ceil(U)=4
+        core 0: ['c1', 'c2']  n=2  U=0.750  bound=0.828
+        core 1: ['c3', 'c4']  n=2  U=0.750  bound=0.828
+        core 2: ['c5', 'c6']  n=2  U=0.750  bound=0.828
+        core 3: ['c7', 'c8']  n=2  U=0.750  bound=0.828
+  WF   FAIL cores used=4/4  per-core U=[0.750, 0.750, 0.750, 0.750]  placed U=3.000 (75.0% of m)  unplaced=['c9', 'c10']  | cores needed (unlimited)=10, lower bound ceil(U)=4
+        core 0: ['c1', 'c5']  n=2  U=0.750  bound=0.828
+        core 1: ['c2', 'c6']  n=2  U=0.750  bound=0.828
+        core 2: ['c3', 'c7']  n=2  U=0.750  bound=0.828
+        core 3: ['c4', 'c8']  n=2  U=0.750  bound=0.828
+==============================================================================
+Test set D_order_sensitive: n=8, U=3.200 (80.0% of m=4), max u=0.600
+  tasks: d1(1/5=0.200), d2(1/5=0.200), d3(1/5=0.200), d4(1/5=0.200), d5(3/5=0.600), d6(3/5=0.600), d7(3/5=0.600), d8(3/5=0.600)
+==============================================================================
+  FF   FAIL cores used=4/4  per-core U=[0.600, 0.800, 0.600, 0.600]  placed U=2.600 (65.0% of m)  unplaced=['d8']  | cores needed (unlimited)=5, lower bound ceil(U)=4
+        core 0: ['d1', 'd2', 'd3']  n=3  U=0.600  bound=0.780
+        core 1: ['d4', 'd5']  n=2  U=0.800  bound=0.828
+        core 2: ['d6']  n=1  U=0.600  bound=1.000
+        core 3: ['d7']  n=1  U=0.600  bound=1.000
+  FFD  OK   cores used=4/4  per-core U=[0.800, 0.800, 0.800, 0.800]  placed U=3.200 (80.0% of m)  | cores needed (unlimited)=4, lower bound ceil(U)=4
+        core 0: ['d5', 'd1']  n=2  U=0.800  bound=0.828
+        core 1: ['d6', 'd2']  n=2  U=0.800  bound=0.828
+        core 2: ['d7', 'd3']  n=2  U=0.800  bound=0.828
+        core 3: ['d8', 'd4']  n=2  U=0.800  bound=0.828
+  BFD  OK   cores used=4/4  per-core U=[0.800, 0.800, 0.800, 0.800]  placed U=3.200 (80.0% of m)  | cores needed (unlimited)=4, lower bound ceil(U)=4
+        core 0: ['d5', 'd1']  n=2  U=0.800  bound=0.828
+        core 1: ['d6', 'd2']  n=2  U=0.800  bound=0.828
+        core 2: ['d7', 'd3']  n=2  U=0.800  bound=0.828
+        core 3: ['d8', 'd4']  n=2  U=0.800  bound=0.828
+  WF   OK   cores used=4/4  per-core U=[0.800, 0.800, 0.800, 0.800]  placed U=3.200 (80.0% of m)  | cores needed (unlimited)=8, lower bound ceil(U)=4
+        core 0: ['d1', 'd5']  n=2  U=0.800  bound=0.828
+        core 1: ['d2', 'd6']  n=2  U=0.800  bound=0.828
+        core 2: ['d3', 'd7']  n=2  U=0.800  bound=0.828
+        core 3: ['d4', 'd8']  n=2  U=0.800  bound=0.828
+==============================================================================
+Test set E_adversarial: n=5, U=2.750 (68.8% of m=4), max u=0.550
+  tasks: e1(11/20=0.550), e2(11/20=0.550), e3(11/20=0.550), e4(11/20=0.550), e5(11/20=0.550)
+==============================================================================
+  FF   FAIL cores used=4/4  per-core U=[0.550, 0.550, 0.550, 0.550]  placed U=2.200 (55.0% of m)  unplaced=['e5']  | cores needed (unlimited)=5, lower bound ceil(U)=3
+        core 0: ['e1']  n=1  U=0.550  bound=1.000
+        core 1: ['e2']  n=1  U=0.550  bound=1.000
+        core 2: ['e3']  n=1  U=0.550  bound=1.000
+        core 3: ['e4']  n=1  U=0.550  bound=1.000
+  FFD  FAIL cores used=4/4  per-core U=[0.550, 0.550, 0.550, 0.550]  placed U=2.200 (55.0% of m)  unplaced=['e5']  | cores needed (unlimited)=5, lower bound ceil(U)=3
+        core 0: ['e1']  n=1  U=0.550  bound=1.000
+        core 1: ['e2']  n=1  U=0.550  bound=1.000
+        core 2: ['e3']  n=1  U=0.550  bound=1.000
+        core 3: ['e4']  n=1  U=0.550  bound=1.000
+  BFD  FAIL cores used=4/4  per-core U=[0.550, 0.550, 0.550, 0.550]  placed U=2.200 (55.0% of m)  unplaced=['e5']  | cores needed (unlimited)=5, lower bound ceil(U)=3
+        core 0: ['e1']  n=1  U=0.550  bound=1.000
+        core 1: ['e2']  n=1  U=0.550  bound=1.000
+        core 2: ['e3']  n=1  U=0.550  bound=1.000
+        core 3: ['e4']  n=1  U=0.550  bound=1.000
+  WF   FAIL cores used=4/4  per-core U=[0.550, 0.550, 0.550, 0.550]  placed U=2.200 (55.0% of m)  unplaced=['e5']  | cores needed (unlimited)=5, lower bound ceil(U)=3
+        core 0: ['e1']  n=1  U=0.550  bound=1.000
+        core 1: ['e2']  n=1  U=0.550  bound=1.000
+        core 2: ['e3']  n=1  U=0.550  bound=1.000
+        core 3: ['e4']  n=1  U=0.550  bound=1.000
+==============================================================================
+Summary table (m = 4)
+==============================================================================
+Set                 Heur  Result   Cores  Placed U  % of m  Unpl.  Need ceil(U)
+A_balanced          FF    OK           4     2.425   60.6%      0     4       3
+A_balanced          FFD   OK           4     2.425   60.6%      0     4       3
+A_balanced          BFD   OK           4     2.425   60.6%      0     4       3
+A_balanced          WF    OK           4     2.425   60.6%      0    14       3
+B_skewed            FF    OK           4     2.650   66.2%      0     4       3
+B_skewed            FFD   OK           4     2.650   66.2%      0     4       3
+B_skewed            BFD   OK           4     2.650   66.2%      0     4       3
+B_skewed            WF    FAIL         4     2.000   50.0%      1    12       3
+C_tight             FF    FAIL         4     3.000   75.0%      2     5       4
+C_tight             FFD   FAIL         4     3.000   75.0%      2     5       4
+C_tight             BFD   FAIL         4     3.000   75.0%      2     5       4
+C_tight             WF    FAIL         4     3.000   75.0%      2    10       4
+D_order_sensitive   FF    FAIL         4     2.600   65.0%      1     5       4
+D_order_sensitive   FFD   OK           4     3.200   80.0%      0     4       4
+D_order_sensitive   BFD   OK           4     3.200   80.0%      0     4       4
+D_order_sensitive   WF    OK           4     3.200   80.0%      0     8       4
+E_adversarial       FF    FAIL         4     2.200   55.0%      1     5       3
+E_adversarial       FFD   FAIL         4     2.200   55.0%      1     5       3
+E_adversarial       BFD   FAIL         4     2.200   55.0%      1     5       3
+E_adversarial       WF    FAIL         4     2.200   55.0%      1     5       3
+==============================================================================
+Per-core RM simulation of A_balanced / FFD over one hyperperiod (40 ms):
+  core 0: tasks=['a2', 'a4', 'a8', 'a1'] misses=0 worst R={'a2': 8, 'a4': 2, 'a8': 4, 'a1': 15}
+  core 1: tasks=['a9', 'a13', 'a5', 'a10'] misses=0 worst R={'a9': 6, 'a13': 2, 'a5': 15, 'a10': 28}
+  core 2: tasks=['a14', 'a3', 'a6', 'a7'] misses=0 worst R={'a14': 10, 'a3': 16, 'a6': 3, 'a7': 25}
+  core 3: tasks=['a11', 'a12'] misses=0 worst R={'a11': 3, 'a12': 9}
